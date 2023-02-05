@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- Sheet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+    <!--FileSaver savaAs 이용 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <title>MySQL Binlog 2 Excel</title>
+</head>
+<style>
+    table {
+        margin:15px 0
+    }
+    th {
+        background-color:#000000;
+        color:#FFFFFF
+    }
+    td
+    {
+        font-size:0.95em;
+        text-align:center;
+        padding:4px;
+        border:1px solid #6d6d6d;
+        border-collapse:collapse
+    }
+    table tr:nth-child(odd){
+        background-color:#aaaaaa;
+    }
+    table tr:nth-child(even){
+        background-color:#fdfdfd;
+    }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MySQL Binlog Simple Parser</a>
+            <label for="file" class="form-label" style="margin: 0;"><input class="form-control" type="file" id="file"></label>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" id="convert" onclick="mysqlBinaryFileConvert()">Convert</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" type="button" onclick="exportExcel()">Download Excel File</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="d-flex justify-content-center" style="min-height: 100vh; width: 80;">
+        <table id="tableData"></table>
+    </div>
+    <script src="./index.js"></script>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Team-Shift-4/MySQL_Binary_Log2Excel" role="button"><i class="bi bi-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        <!-- Section: Text -->
+        <section class="mb-4">
+            <p>
+                조금 더 편하게 분석하기 위해 만든 툴입니다.
+            </p>
+        </section>
+        
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright: Team Shift 4
+        <a class="text-white" href="https://github.com/99JungInKim">99JungInKim</a>,
+        <a class="text-white" href="https://github.com/kimwonny8">Kimwonny8</a>
+        </div>
+    <!-- Copyright -->
+    </footer>
+  <!-- Footer -->
+</body>
+
+</html>
