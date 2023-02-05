@@ -24,10 +24,11 @@
 </style>
 
 <body>
+    <input type="file" id="file">
+    <button id="convert" onclick="test()">Convert!</button>
     <table id="tableData">
     </table>
     <button type="button" id="excelDownload" class="download">엑셀파일 다운로드</button>
-
     <script type="text/javascript">
         const excelDownload = document.querySelector('#excelDownload');
         let table = document.querySelector("#tableData");
