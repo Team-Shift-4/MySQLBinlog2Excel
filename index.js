@@ -75,7 +75,7 @@ function selectOPCode(op) {
     }
 }
 function mysqlBinaryFileConvert() {
-    var input, file, fr;
+    let input, file, fr;
     if (typeof window.FileReader !== 'function') {
         bodyAppend("p", "The file API isn't supported on this browser yet.");
         return;
@@ -162,12 +162,13 @@ function mysqlBinaryFileConvert() {
             }
             big_array.push(small_array);
         }
-        createTable(big_array, line_info);
+        createTable(big_array, line_info, file);
     }
 }
-function createTable(arr, info) {
+function createTable(arr, info, file) {
+    console.log(file)
     let table = document.querySelector("#tableData"), hr, hrContent;
-    table = null;
+    table.innerHTML="";
     for (let i = 0; i < arr.length; i++) {
         // 구분선
         hr = document.createElement("tr");
@@ -216,7 +217,7 @@ var excelHandler = {
         return 'test.xls';	//파일명
     },
     getSheetName: function () {
-        return 'Table Test Sheet';	//시트명
+        return 'M';	//시트명
     },
     getExcelData: function () {
         return document.querySelector('#tableData'); 	//TABLE id
