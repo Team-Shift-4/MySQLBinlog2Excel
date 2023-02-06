@@ -190,7 +190,7 @@ function createTable(arr, info, file) {
                 trEmpty = document.createElement("tr");
                 table.appendChild(trEmpty);
             }
-            tdEmpty.appendChild(document.createTextNode("."));
+            tdEmpty.appendChild(document.createTextNode(".."));
             trEmpty.appendChild(tdEmpty);
             tdNum.appendChild(document.createTextNode(arr[i][j]));
             trNum.appendChild(tdNum);
