@@ -101,7 +101,8 @@ function mysqlBinaryFileConvert() {
     function showResult(fr) {
         var big_array = [], result, n = 4, a_byte, byte_string, line_info = [];
         result = fr.result;
-        while(n< result.length){
+        while(n < result.length){
+            if(result.charCodeAt(n)==NaN) break;
             let small_array = new Array;
             let row_commited_timestamp = 0;
             let row_operation_type;
@@ -110,6 +111,9 @@ function mysqlBinaryFileConvert() {
             let row_length = 0;
             for(let i=0;i<17;i++, n++){
                 a_byte = result.charCodeAt(n);
+                if(a_byte == NaN){
+                    break
+                }
                 if(0<=i && i<=3){
                     let multiple = 1;
                     for(let j=0; j<i;j++){
@@ -121,19 +125,19 @@ function mysqlBinaryFileConvert() {
                 } else if(5<=i && i<=8){
                     let multiple = 1;
                     for(let j=5; j<i;j++){
-                        multiple*=16;
+                        multiple*=256;
                     }
                     row_server_id += (a_byte)*multiple;
                 } else if(9<=i && i<=12){
                     let multiple = 1;
                     for(let j=9; j<i;j++){
-                        multiple*=16;
+                        multiple*=256;
                     }
                     row_length += (a_byte)*multiple;
                 } else if(13<=i && i<=16){
                     let multiple = 1;
                     for(let j=13; j<i;j++){
-                        multiple*=16;
+                        multiple*=256;
                     }
                     row_position += (a_byte)*multiple;
                 }
@@ -142,6 +146,10 @@ function mysqlBinaryFileConvert() {
                     byte_string = "0" + byte_string;
                 }
                 small_array.push(byte_string);
+            }
+            if(row_operation_type == "REALLY UKNOWN"){
+                alert("ERROR?");
+                break;
             }
             line_info.push("COMMITED TIMESTAMP: "+row_commited_timestamp+", OPCODE: "+row_operation_type+", SERVER ID: "+row_server_id+", LENGTH: "+row_length+", POSITION: "+row_position);
             for (let i=0; i < row_length - 17;i++, n++) {
