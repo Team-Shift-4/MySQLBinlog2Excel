@@ -167,6 +167,7 @@ function mysqlBinaryFileConvert() {
 }
 function createTable(arr, info) {
     let table = document.querySelector("#tableData"), hr, hrContent;
+    table = null;
     for (let i = 0; i < arr.length; i++) {
         // 구분선
         hr = document.createElement("tr");
