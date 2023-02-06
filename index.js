@@ -216,7 +216,7 @@ function exportExcel() {
 
 var excelHandler = {
     getExcelFileName: function () {
-        return filename+".xls";	//파일명
+        return filename+".xlsx";	//파일명
     },
     getSheetName: function () {
         return filename;	//시트명
