@@ -1,3 +1,4 @@
+let filename;
 function selectOPCode(op) {
     switch(op){
         case 0:
@@ -93,6 +94,7 @@ function mysqlBinaryFileConvert() {
         fr = new FileReader();
         fr.onload = receivedBinary;
         fr.readAsBinaryString(file);
+        filename=file.name;
     }
 
     function receivedBinary() {
@@ -197,16 +199,16 @@ function createTable(arr, info, file) {
 }
 function exportExcel() {
     // step 1. workbook 생성
-    var wb = XLS.utils.book_new();
+    var wb = XLSX.utils.book_new();
 
     // step 2. 시트 만들기 
     var newWorksheet = excelHandler.getWorksheet();
 
     // step 3. workbook에 새로만든 워크시트에 이름을 주고 붙인다.  
-    XLS.utils.book_append_sheet(wb, newWorksheet, excelHandler.getSheetName());
+    XLSX.utils.book_append_sheet(wb, newWorksheet, excelHandler.getSheetName());
 
     // step 4. 엑셀 파일 만들기 
-    var wbout = XLS.write(wb, { bookType: 'xls', type: 'binary' });
+    var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
 
     // step 5. 엑셀 파일 내보내기 
     saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), excelHandler.getExcelFileName());
@@ -214,10 +216,10 @@ function exportExcel() {
 
 var excelHandler = {
     getExcelFileName: function () {
-        return 'test.xls';	//파일명
+        return filename+".xls";	//파일명
     },
     getSheetName: function () {
-        return 'M';	//시트명
+        return filename;	//시트명
     },
     getExcelData: function () {
         return document.querySelector('#tableData'); 	//TABLE id
