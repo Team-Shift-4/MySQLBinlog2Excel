@@ -182,19 +182,19 @@ function createTable(arr, info, ascii, file) {
         hr.appendChild(hrContent);
 
         for (let j = 0; j < arr[i].length; j++) {
-            let tdNum = document.createElement("td");
+            let tdHex = document.createElement("td");
             let tdAscii = document.createElement("td");
 
             if (j % 16 == 0) {
-                trNum = document.createElement("tr");
-                table.appendChild(trNum);
+                trHex = document.createElement("tr");
+                table.appendChild(trHex);
                 trAscii = document.createElement("tr");
                 table.appendChild(trAscii);
             }
             tdAscii.appendChild(document.createTextNode(ascii[i][j]));
             trAscii.appendChild(tdAscii);
-            tdNum.appendChild(document.createTextNode(arr[i][j]));
-            trNum.appendChild(tdNum);
+            tdHex.appendChild(document.createTextNode(arr[i][j]));
+            trHex.appendChild(tdHex);
         }
     }
 }
