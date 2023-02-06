@@ -101,11 +101,12 @@ function mysqlBinaryFileConvert() {
         showResult(fr);
     }
     function showResult(fr) {
-        var big_array = [], result, n = 4, a_byte, byte_string, line_info = [];
+        var big_array = [], result, n = 4, a_byte, byte_string, line_info = [], big_ascii = [];
         result = fr.result;
         while(n < result.length){
             if(result.charCodeAt(n)==NaN) break;
             let small_array = new Array;
+            let small_ascii = new Array;
             let row_commited_timestamp = 0;
             let row_operation_type;
             let row_server_id = 0;
@@ -113,9 +114,6 @@ function mysqlBinaryFileConvert() {
             let row_length = 0;
             for(let i=0;i<17;i++, n++){
                 a_byte = result.charCodeAt(n);
-                if(a_byte == NaN){
-                    break
-                }
                 if(0<=i && i<=3){
                     let multiple = 1;
                     for(let j=0; j<i;j++){
@@ -147,6 +145,7 @@ function mysqlBinaryFileConvert() {
                 if (byte_string.length < 2) {
                     byte_string = "0" + byte_string;
                 }
+                small_ascii.push(result[n]);
                 small_array.push(byte_string);
             }
             if(row_operation_type == "REALLY UKNOWN"){
@@ -160,14 +159,16 @@ function mysqlBinaryFileConvert() {
                 if (byte_string.length < 2) {
                     byte_string = "0" + byte_string;
                 }
+                small_ascii.push(result[n]);
                 small_array.push(byte_string);
             }
+            big_ascii.push(small_ascii);
             big_array.push(small_array);
         }
-        createTable(big_array, line_info, file);
+        createTable(big_array, line_info, big_ascii, file);
     }
 }
-function createTable(arr, info, file) {
+function createTable(arr, info, ascii, file) {
     console.log(file)
     let table = document.querySelector("#tableData"), hr, hrContent;
     table.innerHTML="";
@@ -182,16 +183,16 @@ function createTable(arr, info, file) {
 
         for (let j = 0; j < arr[i].length; j++) {
             let tdNum = document.createElement("td");
-            let tdEmpty = document.createElement("td");
+            let tdAscii = document.createElement("td");
 
             if (j % 16 == 0) {
                 trNum = document.createElement("tr");
                 table.appendChild(trNum);
-                trEmpty = document.createElement("tr");
-                table.appendChild(trEmpty);
+                trAscii = document.createElement("tr");
+                table.appendChild(trAscii);
             }
-            tdEmpty.appendChild(document.createTextNode(".."));
-            trEmpty.appendChild(tdEmpty);
+            tdAscii.appendChild(document.createTextNode(ascii[i][j]));
+            trAscii.appendChild(tdAscii);
             tdNum.appendChild(document.createTextNode(arr[i][j]));
             trNum.appendChild(tdNum);
         }
