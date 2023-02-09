@@ -152,7 +152,7 @@ function mysqlBinaryFileConvert() {
                 alert("ERROR?");
                 break;
             }
-            line_info.push("COMMITED TIMESTAMP: "+row_commited_timestamp+", OPCODE: "+row_operation_type+", SERVER ID: "+row_server_id+", LENGTH: "+row_length+", POSITION: "+row_position);
+            line_info.push("OPCODE: "+row_operation_type+", POSITION: "+row_position);
             for (let i=0; i < row_length - 17;i++, n++) {
                 a_byte = result.charCodeAt(n);
                 byte_string = a_byte.toString(16);
